@@ -65,3 +65,9 @@ C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\Microsoft.AspNetCore
 C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\MailKit.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\MimeKit.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\NLog.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\NLog.Extensions.Logging.dll
+C:\API\UserManagementApI\UserManagementApI\bin\Debug\net5.0\NLog.Web.AspNetCore.dll

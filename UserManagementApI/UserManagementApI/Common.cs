@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -29,8 +30,8 @@ namespace UserManagementApI
         }
         public static bool SendEmail(string userName, string from, string to, string subject, string msg, string htmlString = null, string password = null)
         {
-            try
-            {
+            //try
+            //{
                 string para = string.Empty;
                 StringBuilder strBody = new StringBuilder();
                 if (!string.IsNullOrEmpty(htmlString))
@@ -45,29 +46,30 @@ namespace UserManagementApI
                 strBody.Append("<br/><br/><br/><p style='font-size:20px;'> Thanks<br/>CT General Hospitals" + " </p>");
                 htmlString += "<br/>";
                 htmlString += strBody;
-                MailMessage message = new MailMessage();
-                SmtpClient smtp = new SmtpClient();
-                message.From = new MailAddress(from);
-                message.To.Add(new MailAddress("surabathuni.praveenkumar@citiustech.com"));
-                message.Subject = subject;
-                message.IsBodyHtml = true;
-                message.Body = htmlString;
-                smtp.Port = 587;
-                smtp.Host = "smtp-mail.outlook.com";
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("stack.miners@outlook.com", "Stack@miners@8604");
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.Send(message);
-                return true;
+            MailMessage message = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+            message.From = new MailAddress(from);
+            message.To.Add(new MailAddress(to));
+            message.Subject = subject;
+            message.IsBodyHtml = true;
+            message.Body = htmlString;
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new NetworkCredential("surabathunipraveenkumar@gmail.com", "Praveen@810");
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(message);
+            return true;
+
+            //}
+            //    catch (Exception ex)
+            //    {
+            //        Console.Write(ex);
+
+            //    }
+            //    return false;
         }
-            catch (Exception ex)
-            {
-                Console.Write(ex);
-               
-            }
-            return false;
-}
 
 
         public static bool SendDefaultPasswordEmail(string from, string subject, string msg, string email, string password)
@@ -92,7 +94,7 @@ namespace UserManagementApI
                 smtp.Host = "smtp.gmail.com"; //for gmail host
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("sendtestmail15@gmail.com", "Sendemail@15");
+                smtp.Credentials = new NetworkCredential("surabathunipraveenkumar@gmail.com", "Praveen@810");
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Send(message);
                 return true;

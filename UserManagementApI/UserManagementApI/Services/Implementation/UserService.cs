@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagementApI.DAL.Interfaces;
-using UserManagementApI.Data;
-using UserManagementApI.Models;
 using UserManagementApI.Services.Interfaces;
 using UserManagementApI.UserModels;
 
@@ -31,7 +29,11 @@ namespace UserManagementApI.Services.Implementation
             var result = await userRepository.BlockUser(model);
             return result;
         }
-
+        public async Task<List<UserModel>> GetAllHospitalUsers()
+        {
+            var result = await userRepository.GetAllHospitalUsers();
+            return result;
+        }
         public async Task<RoleModel> GetRolesById(int userId)
         {
             var result = await userRepository.GetRolesById(userId);
@@ -80,7 +82,13 @@ namespace UserManagementApI.Services.Implementation
             var result = await userRepository.ForgotPassword(email);
             return result;
         }
+
         
 
+        public async Task<List<UserModel>> GetUsers()
+        {
+            var result = await userRepository.GetUsers();
+            return result;
+        }
     }
 }

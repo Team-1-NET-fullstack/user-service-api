@@ -15,8 +15,8 @@ namespace UserManagementApI.Services.Interfaces
         Task<RoleModel> GetRolesByEmail(string email);
        
         Task<ResponseMessage> UpdateUser(UserModel model);
-       
-        //Task<List<UserModel>> GetAllPatientUsers();
+        Task<List<UserModel>> GetUsers();
+        Task<List<UserModel>> GetAllHospitalUsers();
         Task<List<RoleModel>> GetAllRoles();
         Task<ResponseMessage> ChangePassword(LoginModel model);
         Task<ResponseMessage> ForgotPassword(string email);

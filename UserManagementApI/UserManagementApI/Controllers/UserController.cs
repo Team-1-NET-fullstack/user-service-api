@@ -30,6 +30,7 @@ namespace UserManagementApI.Controllers
 
         [HttpPost]
         [Route("RegisterUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterUser([FromBody] UserModel model)
         {
             try
@@ -119,6 +120,7 @@ namespace UserManagementApI.Controllers
 
         [HttpPost]
         [Route("UpdateUser")]
+        [AllowAnonymous]
         public async Task<IActionResult> UpdateUser([FromBody] UserModel model)
         {
             try
@@ -134,26 +136,44 @@ namespace UserManagementApI.Controllers
             }
 
         }
-        
-        //[HttpGet]
-        //[Route("GetAllPatientUsers")]
-        //[Authorize]
-        //public async Task<IActionResult> GetAllPatientUsers()
-        //{
-        //    try
-        //    {
-        //        var result = await this.userService.GetAllPatientUsers();
-        //        return Ok(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.Log(LogLevel.Error, ex, ex.Message);
-        //        return BadRequest(ex);
 
-        //    }
-        //}
+        [HttpGet]
+        [Route("GetAllHospitalUsers")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllHospitalUsers()
+        {
+            try
+            {
+                var result = await this.userService.GetAllHospitalUsers();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.Log(LogLevel.Error, ex, ex.Message);
+                return BadRequest(ex);
+
+            }
+        }
+        [HttpGet]
+        [Route("GetAllUsers")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetUsers()
+        {
+            try
+            {
+                var result = await this.userService.GetUsers();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.Log(LogLevel.Error, ex, ex.Message);
+                return BadRequest(ex);
+
+            }
+        }
         [HttpGet]
         [Route("GetAllRoles")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllRoles()
         {
             try
@@ -173,17 +193,17 @@ namespace UserManagementApI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ForgotPassword([FromBody] LoginModel model)
         {
-            try
-            {
+            //try
+            //{
                 var result = await userService.ForgotPassword(model.Email);
                 return Ok(result);
 
-            }
-            catch (Exception ex)
-            {
-                logger.Log(LogLevel.Error, ex, ex.Message);
-                return BadRequest("Email not send");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    logger.Log(LogLevel.Error, ex, ex.Message);
+            //    return BadRequest("Email not send");
+            //}
 
 
         }
