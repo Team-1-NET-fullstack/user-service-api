@@ -329,9 +329,12 @@ namespace UserManagementApI.DAL.Implementation
                               }).ToListAsync();
             return list;
         }
-        public async Task<List<UserModel>> GetUsers()
+        public async Task<List<UserModel>> GetUser(int userId)
         {
             var list = await (from u in _context.Users
+                              join r in _context.Roles
+                              on u.RoleId equals r.RoleId
+                              where u.UserId == userId
                               select new UserModel
                               {
                                   Title = u.Title,

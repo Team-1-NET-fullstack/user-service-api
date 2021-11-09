@@ -13,7 +13,7 @@ namespace UserManagementApI.DAL.Interfaces
         Task<bool> ActivateUser(ActivateUserModel model);
         Task<RoleModel> GetRolesById(int userId);
         Task<RoleModel> GetRolesByEmail(string email);
-        Task<List<UserModel>> GetUsers();
+        Task<List<UserModel>> GetUser(int userId);
         Task<List<UserModel>> GetAllHospitalUsers();
         Task<ResponseMessage> UpdateUser(UserModel model);
         Task<List<RoleModel>> GetAllRoles();

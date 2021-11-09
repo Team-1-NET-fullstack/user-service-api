@@ -85,9 +85,9 @@ namespace UserManagementApI.Services.Implementation
 
         
 
-        public async Task<List<UserModel>> GetUsers()
+        public async Task<List<UserModel>> GetUser(int userId)
         {
-            var result = await userRepository.GetUsers();
+            var result = await userRepository.GetUser(userId);
             return result;
         }
     }

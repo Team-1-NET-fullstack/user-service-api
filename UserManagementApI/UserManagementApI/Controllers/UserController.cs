@@ -84,7 +84,7 @@ namespace UserManagementApI.Controllers
         [HttpGet]
         [Route("GetRolesById")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetRolesById(int userId)
+        public async Task<IActionResult> GetRolesById([FromQuery] int userId)
         {
             try
             {
@@ -155,13 +155,13 @@ namespace UserManagementApI.Controllers
             }
         }
         [HttpGet]
-        [Route("GetAllUsers")]
+        [Route("GetUser")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUser(int userId)
         {
             try
             {
-                var result = await this.userService.GetUsers();
+                var result = await this.userService.GetUser(userId);
                 return Ok(result);
             }
             catch (Exception ex)
