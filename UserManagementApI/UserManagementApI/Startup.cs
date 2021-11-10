@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Security.Services.API.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using UserManagementApI.DAL.Implementation;
 using UserManagementApI.DAL.Interfaces;
-using UserManagementApI.Data;
 using UserManagementApI.Services.Implementation;
 using UserManagementApI.Services.Interfaces;
 
@@ -36,16 +36,15 @@ namespace UserManagementApI
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddControllers();
+            
             //services.AddControllers()
-            // .AddNewtonsoftJson(options =>
-            //options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
-            services.AddControllers()
-                .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            //    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddMvcCore()
                     .AddAuthorization();// Note - this is on the IMvcBuilder, not the service collection
-                  //.AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+                                        //.AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
+            services.AddOptions();
             services.AddDbContext<CTGeneralHospitalContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IUserRepository, UserRepository>();

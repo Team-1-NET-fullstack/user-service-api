@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Security.Services.API.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagementApI.DAL.Interfaces;
-using UserManagementApI.Data;
-using UserManagementApI.Models;
 using UserManagementApI.UserModels;
 
 namespace UserManagementApI.DAL.Implementation
@@ -54,12 +53,12 @@ namespace UserManagementApI.DAL.Implementation
                     user.CreatedDate = DateTime.Now;
                     user.UpdatedDate = DateTime.Now;
                     user.RoleId = model.RoleId;
-                    user.CreatedBy = model.CreatedBy;
-                    user.UpdatedBy = model.UpdatedBy;
+                    user.CreatedBy = "1";
+                    user.UpdatedBy = "1";
                     user.IsActive = true;
                     user.IsBlocked = false;
                     user.IsFirstTimeUser = true;
-                    user.WorngAttempts = model.WorngAttempts;
+                    user.NoOfWrongAttempts = 0;
                     user.ContactNo = model.ContactNo;
                     user.Gender = model.Gender;
 
@@ -148,32 +147,7 @@ namespace UserManagementApI.DAL.Implementation
                              select new RoleModel { Id = r.RoleId, Name = r.RoleName }).FirstOrDefaultAsync();
             return obj;
         }
-        public async Task<List<UserModel>> GetAllHospitalUsers()
-        {
-            var list = await (from u in _context.Users
-                              join r in _context.Roles
-                              on u.RoleId equals r.RoleId
-                              where u.RoleId != 4
-                              select new UserModel
-                              {
-                                  Title = u.Title,
-                                  UserId = u.UserId,
-                                  FirstName = u.FirstName,
-                                  LastName = u.LastName,
-                                  Email = u.EmailId,
-                                  ContactNo = u.ContactNo,
-                                  Dob = u.Dob,
-                                  EmployeeId = u.EmployeeId,
-                                  WorngAttempts = u.WorngAttempts,
-                                  Role = r.RoleName,
-                                  RoleId = r.RoleId,
-                                  IsActive = u.IsActive,
-                                  IsBlocked = u.IsBlocked,
-                                  Status = (bool)u.IsBlocked ? "Blocked" : (bool)u.IsActive ? "Active" : "InActive",
-                                  CreatedDate = u.CreatedDate
-                              }).ToListAsync();
-            return list;
-        }
+        
 
         public async Task<bool> ActivateUser(ActivateUserModel model)
         {
@@ -196,7 +170,7 @@ namespace UserManagementApI.DAL.Implementation
                     obj.IsActive = model.IsActive;
                     obj.IsBlocked = false;
                     obj.IsFirstTimeUser = true;
-                    obj.WorngAttempts = 0;
+                    obj.NoOfWrongAttempts = 0;
                     await _context.SaveChangesAsync();
                     isUpdated = true;
 
@@ -329,7 +303,58 @@ namespace UserManagementApI.DAL.Implementation
             System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
             return new string(chars);
         }
-
+        public async Task<List<UserModel>> GetAllHospitalUsers()
+        {
+            var list = await (from u in _context.Users
+                              join r in _context.Roles
+                              on u.RoleId equals r.RoleId
+                              where u.RoleId != 4
+                              select new UserModel
+                              {
+                                  Title = u.Title,
+                                  UserId = u.UserId,
+                                  FirstName = u.FirstName,
+                                  LastName = u.LastName,
+                                  Email = u.EmailId,
+                                  ContactNo = (int)u.ContactNo,
+                                  Dob = u.Dob,
+                                  EmployeeId =(int) u.EmployeeId,
+                                  WorngAttempts = u.NoOfWrongAttempts,
+                                  Role = r.RoleName,
+                                  RoleId = r.RoleId,
+                                  IsActive = u.IsActive,
+                                  IsBlocked = u.IsBlocked,
+                                  Status = (bool)u.IsBlocked ? "Blocked" : (bool)u.IsActive ? "Active" : "InActive",
+                                  CreatedDate = u.CreatedDate
+                              }).ToListAsync();
+            return list;
+        }
+        public async Task<List<UserModel>> GetUser(int userId)
+        {
+            var list = await (from u in _context.Users
+                              join r in _context.Roles
+                              on u.RoleId equals r.RoleId
+                              where u.UserId == userId
+                              select new UserModel
+                              {
+                                  Title = u.Title,
+                                  UserId = u.UserId,
+                                  FirstName = u.FirstName,
+                                  LastName = u.LastName,
+                                  Email = u.EmailId,
+                                  ContactNo = (int)u.ContactNo,
+                                  Dob = u.Dob,
+                                  EmployeeId = (int)u.EmployeeId,
+                                  WorngAttempts = u.NoOfWrongAttempts,
+                                  
+                                  RoleId = u.RoleId,
+                                  IsActive = u.IsActive,
+                                  IsBlocked = u.IsBlocked,
+                                  Status = (bool)u.IsBlocked ? "Blocked" : (bool)u.IsActive ? "Active" : "InActive",
+                                  CreatedDate = u.CreatedDate
+                              }).ToListAsync();
+            return list;
+        }
         public async Task<ResponseMessage> ChangePassword(LoginModel model)
         {
             try

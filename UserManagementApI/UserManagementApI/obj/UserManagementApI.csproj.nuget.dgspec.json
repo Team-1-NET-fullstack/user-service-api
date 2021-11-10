@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\API\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj": {}
+    "C:\\Impact\\API\\user-service-api\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj": {}
   },
   "projects": {
-    "C:\\API\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj": {
+    "C:\\Impact\\API\\user-service-api\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\API\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj",
+        "projectUniqueName": "C:\\Impact\\API\\user-service-api\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj",
         "projectName": "UserManagementApI",
-        "projectPath": "C:\\API\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj",
+        "projectPath": "C:\\Impact\\API\\user-service-api\\UserManagementApI\\UserManagementApI\\UserManagementApI.csproj",
         "packagesPath": "C:\\Users\\SurabathuniP\\.nuget\\packages\\",
-        "outputPath": "C:\\API\\UserManagementApI\\UserManagementApI\\obj\\",
+        "outputPath": "C:\\Impact\\API\\user-service-api\\UserManagementApI\\UserManagementApI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SurabathuniP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.15.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.11, )"
@@ -71,6 +75,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.11, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.12, )"
+            },
+            "NLog.Web.AspNetCore": {
+              "target": "Package",
+              "version": "[4.14.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
